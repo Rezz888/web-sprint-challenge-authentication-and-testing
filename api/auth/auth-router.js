@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 const model = require("./users-model")
 
   /*
@@ -38,7 +39,7 @@ const model = require("./users-model")
            }
       const newUser = await model.add({
           username,
-          password: await bcrypt.hash(password, 8),
+          password: await bcrypt.hash(password, process.env.BCRYPT_TIME_COMPLEXITY),
       })
         
       res.status(201).json(newUser)
@@ -86,12 +87,15 @@ const model = require("./users-model")
             })
           }
 
-          // generates a new session for this user,
-		      // and sends back a session id to the client
-		      req.session.user = user
+          const token = jwt.sign({
+            userID: user.id,
+            userRole: user.role,
+        }, process.env.JWT_SECRET)
+
 
           res.json({
-            message: `Welcome ${user.username}`
+            message: `Welcome ${user.username}`,
+            token: token
           })
 
       } catch(err){
