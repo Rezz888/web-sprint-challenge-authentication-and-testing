@@ -39,7 +39,7 @@ const model = require("./users-model")
            }
       const newUser = await model.add({
           username,
-          password: await bcrypt.hash(password, process.env.BCRYPT_TIME_COMPLEXITY),
+          password: await bcrypt.hash(password, 12),
       })
         
       res.status(201).json(newUser)
