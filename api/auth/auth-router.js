@@ -34,12 +34,12 @@ const model = require("./users-model")
 
            if (user) {
              return res.status(409).json({
-               message: "Username is already taken",
+               message: "username taken",
              })
            }
       const newUser = await model.add({
           username,
-          password: await bcrypt.hash(password, 12),
+          password: await bcrypt.hash(password, 3),
       })
         
       res.status(201).json(newUser)
