@@ -73,10 +73,10 @@ describe('Tests the auth routes against the user db',()=>{
 })
 
 describe('joke testing' , () => {
-    test('is seth funny?', ()=>{
-        const seth = true;
+    test('is rezz funny?', ()=>{
+        const rezz = true;
         const funny = true;
-        expect(seth).toBe(funny)
+        expect(rezz).toBe(funny)
     })
     test('[4]grab the rest of the jokes', async ()=>{
         //from this object, point to the body and grab the token
