@@ -17,7 +17,7 @@ const jwt = require("jsonwebtoken")
            const token = req.headers.authorization
            if (!token){
             return res.status(403).json({
-              message: "Invalid credentials",
+              message: "token required",
             })
           }
 
@@ -25,7 +25,7 @@ const jwt = require("jsonwebtoken")
             //token didn't verify, something is wrong with it, don't trust it
             if (err) {
                 return res.status(401).json({
-                    message: "Invalid credentials",
+                    message: "token invalid",
                 })
             }
             // make the tokens payload available to later middleware functions
