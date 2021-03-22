@@ -30,6 +30,11 @@ const model = require("./users-model")
  router.post("/register", async (req, res, next) => {
    try {  
       const { username, password } = req.body
+      if (!username || !password){
+        return res.status(501).json({
+          message: "username and password required",
+        })
+      }
       const user = await model.findBy({ username }).first()
 
            if (user) {
